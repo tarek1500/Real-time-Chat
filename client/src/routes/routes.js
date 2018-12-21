@@ -1,4 +1,5 @@
 import VueRouter from 'vue-router'
+import UserStore from '../stores/UserStore'
 
 import HomePage from '../pages/Home.vue'
 import LoginPage from '../pages/Login.vue'
@@ -12,7 +13,7 @@ const Routes = [
 		component: HomePage,
 		name: 'home',
 		meta: {
-			auth: false
+			auth: null
 		}
 	},
 	{
@@ -52,6 +53,22 @@ const Routes = [
 const Router = new VueRouter({
 	mode: 'history',
 	routes: Routes
+})
+Router.beforeEach((to, from, next) => {
+	if (to.meta.auth == true) {
+		if (UserStore.state.user.authenticated)
+			next()
+		else
+			next({ name: 'login' })
+	}
+	else if (to.meta.auth == false) {
+		if (!UserStore.state.user.authenticated)
+			next()
+		else
+			next({ name: 'home' })
+	}
+	else
+		next()
 })
 
 export default Router

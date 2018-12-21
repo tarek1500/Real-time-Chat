@@ -1,4 +1,7 @@
 export const domainUrl = 'http://localhost/chat/public/'
+export const loginUrl = domainUrl + 'oauth/token'
+export const registerUrl = domainUrl + 'api/register'
+export const userInfoUrl = domainUrl + 'api/user'
 
 // Add Client ID & Secret
 export const clientId = 0, clientSecret = ''

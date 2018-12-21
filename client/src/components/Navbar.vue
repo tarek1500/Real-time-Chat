@@ -14,7 +14,7 @@
 				<li class="nav-item"><router-link :to="{ name: 'pms' }" exact class="nav-link">Private Messages</router-link></li>
 			</ul>
 			<ul class="navbar-nav my-2 my-lg-0">
-				<li v-if="auth" class="nav-item dropdown">
+				<li v-if="UserStore.user.authenticated" class="nav-item dropdown">
 					<a class="nav-link dropdown-toggle" href="#" id="actions-navbar" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Actions</a>
 					<div class="dropdown-menu" aria-labelledby="actions-navbar">
 						<a class="dropdown-item" href="#" @click.prevent="logout">Logout</a>
@@ -30,14 +30,16 @@
 </template>
 
 <script>
+	import { mapState } from 'vuex'
+
 	export default {
-		data () {
-			return {
-				auth: false
-			}
-		},
 		methods: {
 			logout () {}
+		},
+		computed: {
+			...mapState({
+				UserStore: state => state.UserStore
+			})
 		}
 	}
 </script>
