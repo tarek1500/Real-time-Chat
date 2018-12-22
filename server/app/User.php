@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Chat;
 use Laravel\Passport\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -28,4 +29,12 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+	public function Chat($id)
+	{
+		$Sent = $this->hasMany(Chat::class, 'sender_id')->where('receiver_id', $id)->get();
+		$Received = $this->hasMany(Chat::class, 'receiver_id')->where('sender_id', $id)->get();
+
+		return $Sent->concat($Received)->sortBy('created_at')->values();
+	}
 }

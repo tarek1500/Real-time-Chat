@@ -54,4 +54,28 @@ class UserController extends Controller
 			'password' => Hash::make($data['password']),
 		]);
     }
+
+    /**
+     * Get current user.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function getUser(Request $request)
+    {
+		return $request->user();
+    }
+
+    /**
+     * Get all users except current user.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function getAllUsers(Request $request)
+    {
+		$users = User::where('id', '!=', $request->user()->id)->orderBy('name')->get(['id', 'name', 'email']);
+
+		return response(['users' => $users]);
+    }
 }

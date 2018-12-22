@@ -41,7 +41,7 @@
 		},
 		methods: {
 			register () {
-				var data = {
+				let data = {
 					name: this.user.name,
 					email: this.user.email,
 					password: this.user.password,

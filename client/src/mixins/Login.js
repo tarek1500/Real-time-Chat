@@ -3,7 +3,7 @@ import { clientId, clientSecret, setTokens, getHeader, loginUrl, userInfoUrl } f
 export default {
 	methods: {
 		doLogin (username, password) {
-			var data = {
+			let data = {
 				grant_type: 'password',
 				client_id: clientId,
 				client_secret: clientSecret,

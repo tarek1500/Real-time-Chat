@@ -22,5 +22,6 @@
 <style scoped>
 	button {
 		cursor: pointer;
+		transition: all 0.2s linear;
 	}
 </style>

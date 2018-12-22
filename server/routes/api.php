@@ -16,7 +16,9 @@ use Illuminate\Http\Request;
 Route::post('register', 'Api\UserController@register');
 
 Route::group(['middleware' => ['auth:api']], function () {
-	Route::get('user', function (Request $request) {
-		return $request->user();
-	});
+	Route::get('user', 'Api\UserController@getUser');
+	Route::get('users', 'Api\UserController@getAllUsers');
+
+	Route::post('chat/show', 'Api\ChatController@getChat');
+	Route::post('chat/send', 'Api\ChatController@sendChat');
 });
