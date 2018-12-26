@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Chat;
+use App\Events\ChatEvent;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -22,9 +23,10 @@ class ChatController extends Controller
 			'id' => ['required', 'exists:users,id'],
 		])->validate();
 
+		$channel = $this->getChannelName($request->user()->id, $request->id);
 		$Chats = $request->user()->Chat($request->id);
 
-		return response(['chats' => $Chats]);
+		return response(['chats' => $Chats, 'channel' => $channel]);
     }
 
     /**
@@ -46,7 +48,25 @@ class ChatController extends Controller
 			'message' => $request->message,
 			'read' => 0
 		]);
+		$channel = $this->getChannelName($request->user()->id, $request->id);
+
+		broadcast(new ChatEvent($Chat, $channel))->toOthers();
 
 		return response(['chat' => $Chat], 201);
+    }
+
+    /**
+     * Generate channel name.
+     *
+     * @param  int  $sender
+     * @param  int  $receiver
+     * @return string
+     */
+    public function getChannelName($sender, $receiver)
+    {
+		if ($sender > $receiver)
+			return 'chat.' . $receiver . '.' . $sender;
+		else
+			return 'chat.' . $sender . '.' . $receiver;
     }
 }

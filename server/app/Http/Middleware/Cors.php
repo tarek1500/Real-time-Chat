@@ -24,9 +24,8 @@ class Cors
 
 			if (in_array($origin, $domains))
 			{
-				return $next($request)
-					->header('Access-Control-Allow-Origin', $origin)
-					->header('Access-Control-Allow-Headers', 'Origin, Content-Type, Authorization');
+				header('Access-Control-Allow-Origin:' . $origin);
+				header('Access-Control-Allow-Headers: Content-Type, Authorization, X-Socket-ID');
 			}
 		}
 

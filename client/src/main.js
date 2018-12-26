@@ -2,6 +2,9 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import VueResource from 'vue-resource'
 import Vuex from 'vuex'
+import Echo from 'laravel-echo'
+window.Echo = Echo
+window.Pusher = require('pusher-js')
 import Vuebar from 'vuebar'
 import VueChatScroll from 'vue-chat-scroll'
 import VueFlashMessage from 'vue-flash-message';

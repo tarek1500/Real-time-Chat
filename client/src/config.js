@@ -5,9 +5,12 @@ export const userInfoUrl = domainUrl + 'api/user'
 export const usersUrl = domainUrl + 'api/users'
 export const getChatUrl = domainUrl + 'api/chat/show'
 export const sendChatUrl = domainUrl + 'api/chat/send'
+export const pusherEndpointUrl = domainUrl + 'broadcasting/auth'
 
 // Add Client ID & Secret
 export const clientId = 0, clientSecret = ''
+// Add Pusher Key & Cluster & Host & Port
+export const pusherKey = '', pusherCluster = '', pusherHost = '', pusherPort = 0
 
 var accessToken = null, refreshToken = null
 
@@ -16,9 +19,14 @@ export const setTokens = function (_accessToken, _refreshToken) {
 	refreshToken = _refreshToken
 }
 
-export const getHeader = function () {
-	return {
+export const getHeader = function (key = '', value = '') {
+	let header = {
 		'Accept': 'application/json',
 		'Authorization': 'Bearer ' + accessToken
 	}
+
+	if (key)
+		header[key] = value
+
+	return header
 }

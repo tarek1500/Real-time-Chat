@@ -3,8 +3,7 @@ const state = {
 		name: null,
 		email: null,
 		authenticated: false
-	},
-	chatUser: null
+	}
 }
 
 const mutations = {
@@ -17,9 +16,6 @@ const mutations = {
 		state.user.name = null
 		state.user.email = null
 		state.user.authenticated = false
-	},
-	setChatUser (state, chatUser) {
-		state.chatUser = chatUser
 	}
 }
 
@@ -29,9 +25,6 @@ const actions = {
 	},
 	clearUser ({ commit }) {
 		commit('clearUser')
-	},
-	setChatUser ({ commit }, chatUser) {
-		commit('setChatUser', chatUser)
 	}
 }
 
