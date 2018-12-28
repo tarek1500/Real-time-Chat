@@ -146,6 +146,10 @@
 					headers: getHeader()
 				}
 			})
+		},
+		destroyed () {
+			if (this.channel)
+				this.echo.leave(this.channel)
 		}
 	}
 </script>

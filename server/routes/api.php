@@ -21,4 +21,9 @@ Route::group(['middleware' => ['auth:api']], function () {
 
 	Route::post('chat/show', 'Api\ChatController@getChat');
 	Route::post('chat/send', 'Api\ChatController@sendChat');
+
+	Route::post('pm/send', 'Api\PrivateMessageController@sendMessage');
+	Route::get('pm/inbox', 'Api\PrivateMessageController@getInbox');
+	Route::get('pm/outbox', 'Api\PrivateMessageController@getOutbox');
+	Route::post('pm/show', 'Api\PrivateMessageController@showMessage');
 });

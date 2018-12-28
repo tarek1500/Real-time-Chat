@@ -20,13 +20,13 @@ class ChatController extends Controller
     public function getChat(Request $request)
     {
 		Validator::make($request->all(), [
-			'id' => ['required', 'exists:users,id'],
+			'id' => ['required', 'exists:users,id']
 		])->validate();
 
 		$channel = $this->getChannelName($request->user()->id, $request->id);
-		$Chats = $request->user()->Chat($request->id);
+		$chats = $request->user()->Chat($request->id);
 
-		return response(['chats' => $Chats, 'channel' => $channel]);
+		return response(['chats' => $chats, 'channel' => $channel]);
     }
 
     /**
@@ -39,20 +39,19 @@ class ChatController extends Controller
     {
 		Validator::make($request->all(), [
 			'id' => ['required', 'exists:users,id'],
-			'message' => ['required', 'string', 'max:65536'],
+			'message' => ['required', 'string', 'max:65536']
 		])->validate();
 
-		$Chat = Chat::create([
+		$chat = Chat::create([
 			'sender_id' => $request->user()->id,
 			'receiver_id' => $request->id,
-			'message' => $request->message,
-			'read' => 0
+			'message' => $request->message
 		]);
 		$channel = $this->getChannelName($request->user()->id, $request->id);
 
-		broadcast(new ChatEvent($Chat, $channel))->toOthers();
+		broadcast(new ChatEvent($chat, $channel))->toOthers();
 
-		return response(['chat' => $Chat], 201);
+		return response(['chat' => $chat], 201);
     }
 
     /**

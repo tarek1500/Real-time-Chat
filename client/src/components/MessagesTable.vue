@@ -20,14 +20,10 @@
 </script>
 
 <style scoped>
-	table tbody tr {
+	tbody tr {
 		cursor: pointer;
 	}
-	table tbody tr.new {
+	tbody tr.new {
 		font-weight: bold;
-	}
-
-	table tbody tr:not(.new) > th:first-of-type {
-		font-weight: initial;
 	}
 </style>

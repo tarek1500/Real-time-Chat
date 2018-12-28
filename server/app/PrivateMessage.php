@@ -6,14 +6,14 @@ use App\User;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
-class Chat extends Model
+class PrivateMessage extends Model
 {
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-	protected $fillable = ['sender_id', 'receiver_id', 'message'];
+	protected $fillable = ['sender_id', 'receiver_id', 'title', 'message', 'read'];
 
     /**
      * The accessors to append to the model's array form.

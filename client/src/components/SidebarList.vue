@@ -1,5 +1,5 @@
 <template>
-		<button type="button" class="list-group-item list-group-item-action" @click="ChangeActive">
+		<button type="button" class="list-group-item list-group-item-action" @click="changeActive">
 			<slot name="list-item"></slot>
 		</button>
 </template>
@@ -7,7 +7,7 @@
 <script>
 	export default {
 		methods: {
-			ChangeActive (e) {
+			changeActive (e) {
 				var active_element = e.target.parentElement.querySelector('button.active')
 
 				if (active_element)

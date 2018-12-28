@@ -18,3 +18,7 @@ Broadcast::channel('App.User.{id}', function ($user, $id) {
 Broadcast::channel('chat.{sender}.{receiver}', function ($user) {
 	return $user->only(['id', 'name']);
 });
+
+Broadcast::channel('pm.{receiver}', function ($user, $receiver) {
+	return (int) $user->id === (int) $receiver;
+});

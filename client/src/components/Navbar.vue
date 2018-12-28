@@ -17,7 +17,7 @@
 				<li v-if="UserStore.user.authenticated" class="nav-item dropdown">
 					<a class="nav-link dropdown-toggle" href="#" id="actions-navbar" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Actions</a>
 					<div class="dropdown-menu" aria-labelledby="actions-navbar">
-						<a class="dropdown-item" href="#" @click.prevent="logout">Logout</a>
+						<a class="dropdown-item" href="#" @click.prevent="logout()">Logout</a>
 					</div>
 				</li>
 				<template v-else>
@@ -30,17 +30,29 @@
 </template>
 
 <script>
+	import Flash from '../mixins/Flash'
+	import { clearTokens } from '../config'
 	import { mapState } from 'vuex'
 
 	export default {
 		methods: {
-			logout () {}
+			logout () {
+				clearTokens()
+				this.$store.dispatch('clearUser')
+
+				this.$router.push({ name: 'home' })
+
+				this.flash(this.generateFlashString('Logged out, See you later'), 'success', {
+					timeout: 3000
+				})
+			}
 		},
 		computed: {
 			...mapState({
 				UserStore: state => state.UserStore
 			})
-		}
+		},
+		mixins: [Flash]
 	}
 </script>
 
