@@ -13,9 +13,15 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::post('register', 'Api\UserController@register');
+Route::post('login', 'Api\AuthController@login');
+Route::post('register', 'Api\AuthController@register');
+
+Route::post('token/check', 'Api\AuthController@checkToken');
+Route::post('token/refresh', 'Api\AuthController@refreshToken');
 
 Route::group(['middleware' => ['auth:api']], function () {
+	Route::get('logout', 'Api\AuthController@logout');
+
 	Route::get('user', 'Api\UserController@getUser');
 	Route::get('users', 'Api\UserController@getAllUsers');
 

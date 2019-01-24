@@ -31,19 +31,23 @@
 
 <script>
 	import Flash from '../mixins/Flash'
-	import { clearTokens } from '../config'
+	import { getHeader, logoutUrl, clearTokens } from '../config'
 	import { mapState } from 'vuex'
 
 	export default {
 		methods: {
 			logout () {
-				clearTokens()
-				this.$store.dispatch('clearUser')
+				this.$http.get(logoutUrl, { headers: getHeader() }).then(response => {
+					localStorage.removeItem('tokens')
 
-				this.$router.push({ name: 'home' })
+					clearTokens()
+					this.$store.dispatch('clearUser')
 
-				this.flash(this.generateFlashString('Logged out, See you later'), 'success', {
-					timeout: 3000
+					this.$router.push({ name: 'home' })
+
+					this.flash(this.generateFlashString('Logged out, See you later'), 'success', {
+						timeout: 3000
+					})
 				})
 			}
 		},

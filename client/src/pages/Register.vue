@@ -21,9 +21,9 @@
 
 <script>
 	import Card from '../components/Card.vue'
-	import { registerUrl } from '../config'
-	import DoLogin from '../mixins/Login'
+	import { registerUrl, setTokens } from '../config'
 	import Flash from '../mixins/Flash'
+	import User from '../mixins/User'
 
 	export default {
 		components: {
@@ -49,15 +49,10 @@
 				}
 
 				this.$http.post(registerUrl, data).then(response => {
-					if (response.status == 201) {
-						this.doLogin(data.email, data.password).then(response => {
-							if (response.status == 200) {
-								this.flash(this.generateFlashString('Welcome "' + response.body.name + '" !'), 'success', {
-									timeout: 3000
-								})
-							}
-						})
-					}
+					setTokens(response.body.access_token, response.body.refresh_token)
+					this.userInfo()
+
+					this.$router.push({ name: 'home' })
 				}, response => {
 					if (response.status == 422) { // Validation errors
 						this.flash(this.generateFlashString(response.body.message, response.body.errors), 'error', {
@@ -67,7 +62,7 @@
 				})
 			}
 		},
-		mixins: [DoLogin, Flash]
+		mixins: [User, Flash]
 	}
 </script>
 

@@ -1,18 +1,25 @@
 export const domainUrl = 'http://localhost/chat/public/'
-export const loginUrl = domainUrl + 'oauth/token'
+
+export const loginUrl = domainUrl + 'api/login'
+export const logoutUrl = domainUrl + 'api/logout'
 export const registerUrl = domainUrl + 'api/register'
+
+export const checkTokenUrl = domainUrl + 'api/token/check'
+export const refreshTokenUrl = domainUrl + 'api/token/refresh'
+
 export const userInfoUrl = domainUrl + 'api/user'
 export const usersUrl = domainUrl + 'api/users'
+
 export const getChatUrl = domainUrl + 'api/chat/show'
 export const sendChatUrl = domainUrl + 'api/chat/send'
+
 export const sendMessageUrl = domainUrl + 'api/pm/send'
 export const getInboxUrl = domainUrl + 'api/pm/inbox'
 export const getOutboxUrl = domainUrl + 'api/pm/outbox'
 export const showMessageUrl = domainUrl + 'api/pm/show'
+
 export const pusherEndpointUrl = domainUrl + 'broadcasting/auth'
 
-// Add Client ID & Secret
-export const clientId = 0, clientSecret = ''
 // Add Pusher Key & Cluster & Host & Port
 export const pusherKey = '', pusherCluster = '', pusherHost = '', pusherPort = 0
 

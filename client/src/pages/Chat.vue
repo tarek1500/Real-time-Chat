@@ -132,7 +132,9 @@
 				this.users = response.body.users
 			})
 
-			window.localStorage.clear() // To let pusher re-connect to Websocket on every startup
+			for (var data in window.localStorage) // To let pusher re-connect to Websocket on every startup
+				if (data.startsWith('pusherTransport'))
+					window.localStorage.removeItem(data)
 
 			this.echo = new Echo({
 				broadcaster: 'pusher',
