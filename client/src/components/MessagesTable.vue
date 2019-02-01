@@ -1,6 +1,6 @@
 <template>
 	<div class="table-responsive">
-		<table class="table table-bordered table-striped table-hover">
+		<table class="table table-bordered table-striped table-hover mb-0">
 			<thead>
 				<tr>
 					<th><slot name="sender-type"></slot></th>

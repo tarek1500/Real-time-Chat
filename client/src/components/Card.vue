@@ -13,4 +13,9 @@
 </script>
 
 <style>
+	@media (max-width: 767.98px) {
+		.card {
+			width: 100% !important;
+		}
+	}
 </style>

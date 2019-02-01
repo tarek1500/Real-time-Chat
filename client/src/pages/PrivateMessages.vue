@@ -1,13 +1,13 @@
 <template>
 	<div class="row">
-		<div class="col-3">
+		<div class="col-md-4 col-lg-3 mb-4 mb-md-0">
 			<div class="list-group">
 				<sidebar @click.native="changeComponent('send')"><template slot="list-item">Send Message</template></sidebar>
 				<sidebar @click.native="changeComponent('inbox')"><template slot="list-item">Inbox</template></sidebar>
 				<sidebar @click.native="changeComponent('sent')"><template slot="list-item">Sent</template></sidebar>
 			</div>
 		</div>
-		<div class="col-9">
+		<div class="col-md-8 col-lg-9">
 			<scroll-bar class="fixed-height">
 				<div slot="content">
 					<component :is="component" v-bind="messageProps" @showMessage="show"></component>
@@ -64,6 +64,12 @@
 
 <style scoped>
 	.fixed-height {
-		height: calc(100vh - 59px - 24px - 24px);	/* Navbar height - top margin - bottom margin */
+		height: calc(100vh - 59px - 3rem);	/* Navbar height - (top, bottom) margin */
+	}
+
+	@media (max-width: 767.98px) {
+		.fixed-height {
+			height: calc(100vh - 59px - 148px - 4.5rem);	/* Navbar height - Sidebar List height - (Sidebar List bottom, top, bottom) margin */
+		}
 	}
 </style>

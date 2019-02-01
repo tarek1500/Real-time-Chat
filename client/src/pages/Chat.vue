@@ -1,13 +1,13 @@
 <template>
 	<div class="row">
-		<div class="col-3">
+		<div class="col-md-4 col-lg-3 mb-4 mb-md-0">
 			<scroll-bar class="fixed-height">
 				<div slot="content" class="list-group">
 					<sidebar v-for="user in users" @click.native="showChat(user.id, user.name)"><template slot="list-item">{{ user.name }}</template></sidebar>
 				</div>
 			</scroll-bar>
 		</div>
-		<div class="col-9">
+		<div class="col-md-8 col-lg-9">
 			<scroll-bar class="fixed-height">
 				<div slot="content" v-chat-scroll="{ always: false, smooth: true }">
 					<div v-show="user.id">
@@ -158,7 +158,7 @@
 
 <style scoped>
 	.fixed-height {
-		height: calc(100vh - 59px - 24px - 24px);	/* Navbar height - top margin - bottom margin */
+		height: calc(100vh - 59px - 3rem);	/* Navbar height - (top, bottom) margin */
 	}
 
 	.status {
@@ -217,6 +217,20 @@
 		}
 		50% {
 			border-color: orange;
+		}
+	}
+
+	@media (max-width: 767.98px) {
+		.row > div:first-of-type .fixed-height {
+			height: 148px;	/* Sidebar List height */
+		}
+
+		.row > div:last-of-type .fixed-height {
+			height: calc(100vh - 59px - 148px - 4.5rem);	/* Navbar height - Sidebar List height - (Sidebar List bottom, top, bottom) margin */
+		}
+
+		.status {
+			top: calc(83px + 148px + 1.5rem);	/* Sidebar List height + Sidebar List bottom margin */
 		}
 	}
 </style>
