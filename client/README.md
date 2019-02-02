@@ -1,29 +1,22 @@
-# client
+# Chat-Client
+Real-time Chat client based on Vue.js .
 
-## Project setup
-```
+## Installation
+Use node package manager [NPM](https://www.npmjs.com/) to install the Chat client.
+```bash
 npm install
 ```
 
-### Compiles and hot-reloads for development
-```
+## Usage
+Use the following command to startup the application.<br>
+For testing, you can use:
+```bash
 npm run serve
 ```
 
-### Compiles and minifies for production
-```
+To build a release, you can use:
+```bash
 npm run build
 ```
 
-### Run your tests
-```
-npm run test
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## Your client is ready to use !
